@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "469604947991",
+    "firebase_url": "https://healthyhabeats-cs199.firebaseio.com",
+    "project_id": "healthyhabeats-cs199",
+    "storage_bucket": "healthyhabeats-cs199.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469604947991:android:98d09d30db1425818b2452",
+        "android_client_info": {
+          "package_name": "com.cs199.healthyhabeats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469604947991-8vh9jkgn903jb3esvtv8bgpo01gaupdt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf37HEurqccfYMB9Ac4OYZJAfYgSRTndA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469604947991-8vh9jkgn903jb3esvtv8bgpo01gaupdt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
