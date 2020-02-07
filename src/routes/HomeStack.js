@@ -51,7 +51,7 @@ const HomeStack = createStackNavigator(screens, {
         headerTintColor: MAIN_WHITE,
         headerStyle: { backgroundColor: MAIN_BLUE, height: 60 }
     },
-    initialRouteName: 'Test',
+    initialRouteName: 'Welcome',
     transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS
 });
 

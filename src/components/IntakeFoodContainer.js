@@ -4,12 +4,13 @@ import { Feather } from '@expo/vector-icons'
 import { withNavigation } from 'react-navigation';
 import * as ThemeConstants from '../common/Themes';
 
+
 import * as firebase from 'firebase';
 import '@firebase/firestore';
-
 // FOODARRAY: contains list of foods in a particular setting
 // when pressed => FOODARRAY[INDEX] get the food object
 // after deletion setFoodArray to
+
 const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation }) => {
     const firebaseRef = firebase.database().ref();
     const meal = onDeletion5;
@@ -25,91 +26,20 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
     const setIsDeleted = onDeletion2;
     const setTotalFoodArray = onDeletion3;
 
-    const renderFoodItem = () => {
-        return(
-            <TouchableOpacity style={styles.food}
-                onPress = { () => {
-                    navigation.navigate('EditServing',{
-                        foodArray: foodArray1,
-                        setFoodArray: setFoodArray1,
-                        foodItem: item,
-                        action: 'edit',
-                        mealTitle : mealTitle,
-                        userID: token,
-                        setIsModified: setIsModified
-                    });
-                }
 
-                }
-            >
-                <View>
-                    <Text style={styles.text_regular}>{item.foodName}</Text>
-                    <Text style={styles.text_small}>
-                        Serving: {item.serving}  •  Energy: {item.calories * item.serving} kcal
-                    </Text>
-                </View>
+    /*const getUserID = async () => {
+        try {
+            const userID = await AsyncStorage.getItem('userID');
+            userTokenID = userID;
+            console.log(userID);
+            console.log(userTokenID);
+		} catch (error) {
+			// Error retrieving data
+			console.log(error.message);
+		}      
+    };*/
 
-                <View style={styles.button_delete}>
-                    <Feather
-                        name='x-circle'
-                        onPress={() => Alert.alert(
-                            'Are you sure?',
-                            'Remove ' + item.foodName + ' from ' + mealTitle + '?',
-                            [
-                                {
-                                    text: 'Cancel',
-                                    onPress: () => console.log('cancel pressed')
-                                },
-                                {
-                                    text: 'Remove',
-                                    onPress: () => {
-                                        
-
-                                        temp = [];
-                                        Keyboard.dismiss();
-                                        counter = 0;
-                                        let x = foodArray.filter(foodArray => (foodArray.foodName !== item.foodName) && (foodArray.deleteID !== item.deleteID));
-                                        let y = foodArray.filter(foodArray => (foodArray.foodName === item.foodName) && (foodArray.deleteID === item.deleteID));
-                                        let data = y[0].deleteID;
-                                        
-                                        for (let i = 0; i < meal.length; i++) {
-                                            if (meal[i].deleteID != data ){
-                                                counter = counter + 1;
-                                            }
-                                            else{
-                                                break;
-                                            }
-                                        }
-                                        
-                                        meal.splice(counter,1); // strip in total breakfast [1,2,3]
-                                        
-                                        if (x.length == 0){
-                                            setFoodArray([]);
-                                            setIsDeleted(Math.random());
-                                            setIsDelete(Math.random());
-                                            
-                                        }
-                                        else{
-                                            setFoodArray(x); // current meal we are setting breakfast to contain
-                                            setTotalFoodArray(meal);
-                                            setIsDeleted(Math.random());
-                                            setIsDelete(Math.random());
-                                        }
-                                        temp = meal;
-                                        firebaseRef.child('Users').child(token).child('Food Intakes').child(mealTitle).set(temp);
-
-                                        ToastAndroid.show(`Removed ${item.foodName} successfully.`, ToastAndroid.SHORT);                                                        
-                                    }
-                                }
-                            ]
-                        )}
-                        style={{fontSize: 25, color: ThemeConstants.FONT_GRAY}}
-                    />
-                </View>
-            </TouchableOpacity>
-        );
-    };
-
+    
     return(
         <View style={styles.container}>
             <View style={styles.details}>
@@ -120,7 +50,90 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                     keyExtractor = {(item) => (item.deleteID).toString()}
                     showsVerticalScrollIndicator={false}
                     renderItem={({item,index})=>{
-                        renderFoodItem();
+                        return (
+                            <TouchableOpacity style={styles.food}
+                                onPress = { () => {
+                                    // console.log(item);
+                                    navigation.navigate('EditServing',{
+                                        foodArray: foodArray1,
+                                        setFoodArray: setFoodArray1,
+                                        foodItem: item,
+                                        action: 'edit',
+                                        mealTitle : mealTitle,
+                                        userID: token,
+                                        setIsModified: setIsModified
+                                    });
+                                }
+
+                                }
+                            >
+                                <View>
+                                    <Text style={styles.text_regular}>{item.foodName}</Text>
+                                    <Text style={styles.text_small}>
+                                        Serving: {item.serving}  •  Energy: {item.calories * item.serving} kcal
+                                    </Text>
+                                </View>
+
+                                <View style={styles.button_delete}>
+                                    <Feather
+                                        name='x-circle'
+                                        onPress={() => Alert.alert(
+                                            'Are you sure?',
+                                            'Remove ' + item.foodName + ' from ' + mealTitle + '?',
+                                            [
+                                                {
+                                                    text: 'Cancel',
+                                                    onPress: () => console.log('cancel pressed')
+                                                },
+                                                {
+                                                    text: 'Remove',
+                                                    onPress: () => {
+                                                       
+
+                                                        temp = [];
+                                                        Keyboard.dismiss();
+                                                        counter = 0;
+                                                        let x = foodArray.filter(foodArray => (foodArray.foodName !== item.foodName) && (foodArray.deleteID !== item.deleteID));
+                                                        let y = foodArray.filter(foodArray => (foodArray.foodName === item.foodName) && (foodArray.deleteID === item.deleteID));
+                                                        let data = y[0].deleteID;
+                                                        
+                                                        for (let i = 0; i < meal.length; i++) {
+                                                            if (meal[i].deleteID != data ){
+                                                                counter = counter + 1;
+                                                            }
+                                                            else{
+                                                                break;
+                                                            }
+                                                        }
+                                                        
+                                                        meal.splice(counter,1); // strip in total breakfast [1,2,3]
+                                                        
+                                                        if (x.length == 0){
+                                                            setFoodArray([]);
+                                                            setIsDeleted(Math.random());
+                                                            setIsDelete(Math.random());
+                                                            
+                                                        }
+                                                        else{
+                                                            setFoodArray(x); //current meal we are setting breakfast to contain
+                                                            setTotalFoodArray(meal);
+                                                            setIsDeleted(Math.random());
+                                                            setIsDelete(Math.random());
+                                                        }
+                                                        temp = meal;
+                                                        firebaseRef.child('Users').child(token).child('Food Intakes').child(mealTitle).set(temp);
+
+                                                        ToastAndroid.show(`Removed ${item.foodName} successfully.`, ToastAndroid.SHORT);                                                        
+                                                    }
+                                                }
+                                            ]
+                                        )}
+                                        style={{fontSize: 25, color: ThemeConstants.FONT_GRAY}}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                            //</Swipeout>
+                        )
                     }}
                 />
             </View>
