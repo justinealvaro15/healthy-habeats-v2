@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import SearchFoodScreen from '../screens/SearchFoodScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 
+import FoodListScreen from '../screens/FoodListScreen';
+
 import Header from '../components/Header';
 import { MAIN_BLUE, MAIN_WHITE } from '../common/Themes';
 import StatsDetail from '../components/StatsDetail';
@@ -43,6 +45,9 @@ const screens = {
     },
     Test: {
         screen: StatsDetail
+    },
+    FoodList: {
+        screen: FoodListScreen
     }
 };
 

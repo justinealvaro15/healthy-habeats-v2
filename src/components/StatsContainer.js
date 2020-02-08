@@ -4,13 +4,16 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import StatsDetail from './StatsDetail';
 import * as ThemeConstants from '../common/Themes';
 
-const StatsContainer = ({ valuesTotal, valuesCurrent }) => {
+const StatsContainer = ({ valuesTotal, valuesCurrent, navigateToEnergy }) => {
     return(
         <View style={styles.container}>
             <View style={styles.row}>
                 <TouchableHighlight
                     style={styles.details}
-                    onPress={() => console.log('navigate to energy')}
+                    onPress={() => {
+                        console.log('navigate to energy');
+                        navigateToEnergy;
+                    }}
                     underlayColor={ThemeConstants.HIGHLIGHT_GREEN}
                 >
                     <View>
