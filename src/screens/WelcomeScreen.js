@@ -110,10 +110,11 @@ export default class WelcomeScreen extends React.Component {
 	componentDidMount() {
 		registerForPushNotificationsAsync();
 		_notificationSubscription = Notifications.addListener(_handleNotification);
+		//console.log('Notifications Scheduled successfully!');
+		
 		let currentDate = Date.now();
 		currentDate = new Date(currentDate);
-
-		// get day, month and year from current date to create time to schedule
+		// get the day, month and year from current date to create time to schedule
 		const year = currentDate.getFullYear();
 		const month = currentDate.getMonth();
 		const current_date = currentDate.getDate();
@@ -124,8 +125,16 @@ export default class WelcomeScreen extends React.Component {
 		let time3 = 0;
 		let time4 = 0;
 		let time5 = 0;
+		//let time6 = 0;
+		//let time7 = 0;
+		//let temp_date1 = new Date();
+		//let temp_date2 = new Date();
+		//let temp_date3 = new Date();
+		//temp_date1.setHours(14,30);
+		//temp_date2.setHours(17,30);
+		//temp_date3.setHours(20,30);
 
-		// notif#1 check: current_hour > 7am, set notif for 7am tommorow 
+		//notif#1 check: current_hour > 7am, set notif for 7am tommorow 
 		if(hour >= 7){
 			time1 = new Date(year, month, tomorrow_date, 7); //7am tomorrow
 			console.log('tom');
@@ -147,7 +156,7 @@ export default class WelcomeScreen extends React.Component {
 			console.log('today');
 		};
 
-		// tips/notifs
+		//tips/notifs
 		if(hour >= 10){
 			time4 = new Date(year, month, tomorrow_date, 10); //10am
 			console.log('tom');
@@ -182,12 +191,13 @@ export default class WelcomeScreen extends React.Component {
 			.then((state) => {
 				if(this.state.userToken === 'firstTime'){
 					//B,L,D notifs
-					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification1, schedulingOptions1);
-					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification2, schedulingOptions2);
-					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification3, schedulingOptions3);
+					Notifications.cancelAllScheduledNotificationsAsync();
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification10, schedulingOptions1);
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions2);
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification6, schedulingOptions3);
 					//4 healthy tips notif
-					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification4, schedulingOptions4);
-					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions5);
+					//Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification4, schedulingOptions4);
+					//Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions5);
 					this.props.navigation.replace('Home');
 					this.props.navigation.navigate('Tutorial1');
 				} else {

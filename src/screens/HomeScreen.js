@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import IntakeFoodContainer from '../components/IntakeFoodContainer';
 import StatsContainer from '../components/StatsContainer';
+import FoodListScreen from '../screens/FoodListScreen';
 
 import * as firebase from 'firebase';
 import '@firebase/firestore';
@@ -162,25 +163,25 @@ const HomeScreen = ({ navigation }) => {
                 if(calories >= parseFloat(userData.calories) && calories <= (parseFloat(userData.calories) + parseFloat(userData.calories) * 0.2)){
                     showPopup(PopupText.popup_complete_calories1.title, PopupText.popup_complete_calories1.message);
                 }
-                else if(calories >= parseFloat(userData.calories) && calories >= (parseFloat(userData.calories) + parseFloat(userData.calories) * 0.2)){
+                else if(calories > (parseFloat(userData.calories) + parseFloat(userData.calories) * 0.2)){
                     showPopup(PopupText.popup_complete_calories2.title, PopupText.popup_complete_calories2.message);
                 };
                 if(carbs >= parseFloat(userData.carbs) && carbs <= (parseFloat(userData.carbs) + parseFloat(userData.carbs) * 0.2)){
                     showPopup(PopupText.popup_complete_carbs1.title, PopupText.popup_complete_carbs1.message);
                 }
-                else if(carbs >= parseFloat(userData.carbs) && carbs >= (parseFloat(userData.carbs) + parseFloat(userData.carbs) * 0.2)){
+                else if(carbs > (parseFloat(userData.carbs) + parseFloat(userData.carbs) * 0.2)){
                     showPopup(PopupText.popup_complete_carbs2.title, PopupText.popup_complete_carbs2.message);
                 };
                 if(proteins >= parseFloat(userData.proteins) && proteins <= (parseFloat(userData.proteins) + parseFloat(userData.proteins) * 0.2)){
                     showPopup(PopupText.popup_complete_proteins1.title, PopupText.popup_complete_proteins1.message);
                 }
-                else if(proteins >= parseFloat(userData.proteins) && proteins >= (parseFloat(userData.proteins) + parseFloat(userData.proteins) * 0.2)){
+                else if(proteins > (parseFloat(userData.proteins) + parseFloat(userData.proteins) * 0.2)){
                     showPopup(PopupText.popup_complete_proteins2.title, PopupText.popup_complete_proteins2.message);
                 };
                 if(fats >= parseFloat(userData.fats) && fats <= (parseFloat(userData.fats) + parseFloat(userData.fats) * 0.2)){
                     showPopup(PopupText.popup_complete_fats1.title, PopupText.popup_complete_fats1.message);
                 }
-                else if(fats >= parseFloat(userData.fats) && fats >= (parseFloat(userData.fats) + parseFloat(userData.fats) * 0.2)){
+                else if(fats > (parseFloat(userData.fats) + parseFloat(userData.fats) * 0.2)){
                     showPopup(PopupText.popup_complete_fats2.title, PopupText.popup_complete_fats2.message);
                 };
                 if(calories >= parseFloat(userData.calories) * 0.5 && calories <= parseFloat(userData.calories) * 0.75 ){
@@ -563,100 +564,42 @@ const HomeScreen = ({ navigation }) => {
                 <StatsContainer
                     valuesTotal = {userData}
                     valuesCurrent = {current}
+                    category = {''}
+                    variables = {{
+                        current_breakfast: current_breakfast,
+                        current_lunch: current_lunch,
+                        current_dinner: current_dinner,
+                        current_snacks: current_snacks,
+                        current_energy: current.current_calories, 
+                        current_carbs: current.current_carbs, 
+                        current_proteins: current.current_proteins, 
+                        current_fats: current.current_fats, 
+                        total_energy: userData.calories,
+                        total_carbs: userData.carbs,
+                        total_proteins: userData.proteins,
+                        total_fats: userData.fats,
+                        breakfast: breakfast,
+                        lunch: lunch,
+                        dinner: dinner,
+                        snacks: snacks,
+                        setBreakfast: setBreakfast,
+                        setLunch: setLunch,
+                        setDinner: setDinner,
+                        setSnacks: setSnacks,
+                        setCurrentBreakfast: setCurrentBreakfast,
+                        setCurrentLunch: setCurrentLunch,
+                        setCurrentDinner: setCurrentDinner,
+                        setCurrentSnacks: setCurrentSnacks,
+                        dateSelected: dateSelected,
+                        dateMoment: dateMoment,
+                        token: token,
+                        setIsModified: setIsModified,
+                        setIsDeleted: setIsDeleted,
+                        category: ''
+                    }}
+                 
                 />
             </View>
-            
-            <IntakeFoodContainer
-                food={current_breakfast}
-                mealTitle='Breakfast'
-                navigateToSearchFood={() => navigation.navigate('SearchFood', {
-                    foodArray: breakfast,
-                    setFoodArray: setBreakfast,
-                    currentDate: dateMoment,
-                    deleteID: 0,
-                    mealTitle: 'Breakfast',
-                    userID: token,
-                    setIsModified: setIsModified
-                })}
-                onDeletion={setCurrentBreakfast}
-                onDeletion2={setIsDeleted}
-                onDeletion3={setBreakfast}
-                onDeletion4={dateSelected}
-                onDeletion5={breakfast}
-                foodArray1 = {breakfast}
-                setFoodArray1 = {setBreakfast}
-                token = {token}
-                setIsModified = {setIsModified}
-            />
-
-            <IntakeFoodContainer
-                food={current_lunch}
-                mealTitle='Lunch'
-                navigateToSearchFood={() => navigation.navigate('SearchFood', {
-                    foodArray: lunch,
-                    setFoodArray: setLunch,
-                    currentDate: dateMoment,
-                    deleteID: 0,
-                    mealTitle: 'Lunch',
-                    userID: token,
-                    setIsModified: setIsModified
-                })}
-                onDeletion={setCurrentLunch}
-                onDeletion2={setIsDeleted}
-                onDeletion3={setLunch}
-                onDeletion4={dateSelected}
-                onDeletion5={lunch}
-                foodArray1 = {lunch}
-                setFoodArray1 = {setLunch}
-                token = {token}
-                setIsModified = {setIsModified}
-            />
-
-            <IntakeFoodContainer
-                food={current_dinner}
-                mealTitle='Dinner'
-                navigateToSearchFood={() => navigation.navigate('SearchFood', {
-                    foodArray: dinner,
-                    setFoodArray: setDinner,
-                    currentDate: dateMoment,
-                    deleteID: 0,
-                    mealTitle: 'Dinner',
-                    userID: token,
-                    setIsModified: setIsModified
-                })}
-                onDeletion={setCurrentDinner}
-                onDeletion2={setIsDeleted}
-                onDeletion3={setDinner}
-                onDeletion4={dateSelected}
-                onDeletion5={dinner}
-                foodArray1 = {dinner}
-                setFoodArray1 = {setDinner}
-                token = {token}
-                setIsModified = {setIsModified}
-            />
-
-            <IntakeFoodContainer
-                food={current_snacks}
-                mealTitle='Snacks'
-                navigateToSearchFood={() => navigation.navigate('SearchFood', {
-                    foodArray: snacks,
-                    setFoodArray: setSnacks,
-                    currentDate: dateMoment,
-                    deleteID: 0,
-                    mealTitle: 'Snacks',
-                    userID: token,
-                    setIsModified: setIsModified
-                })}
-                onDeletion={setCurrentSnacks}
-                onDeletion2={setIsDeleted}
-                onDeletion3={setSnacks}
-                onDeletion4={dateSelected}
-                onDeletion5={snacks}
-                foodArray1 = {snacks}
-                setFoodArray1 = {setSnacks}
-                token = {token}
-                setIsModified = {setIsModified}
-            />
         </ScrollView>
     );
 };
