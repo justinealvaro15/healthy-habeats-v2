@@ -11,7 +11,7 @@ import '@firebase/firestore';
 // when pressed => FOODARRAY[INDEX] get the food object
 // after deletion setFoodArray to
 
-const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation }) => {
+const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation, category, current_energy, current_carbs, current_proteins, current_fats }) => {
     const firebaseRef = firebase.database().ref();
     const meal = onDeletion5;
     const foodArray = food;
@@ -70,14 +70,18 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                                 <View>
                                     <Text style={styles.text_regular}>{item.foodName}</Text>
                                     <Text style={styles.text_small}>
+                                        {'Serving: ' + item.serving + ' • ' + category + ': ' + item.calories * item.serving}
+                                        {category === 'Energy' ? ' kcal ' : ' g '}
+                                        {'('}
+                                        {category === 'Energy' ? ((item.calories/current_energy)*100).toFixed(1) : 
+                                         category === 'Carbs' ? ((item.carbs/current_carbs)*100).toFixed(1) :
+                                         category === 'Proteins' ? ((item.proteins/current_proteins)*100).toFixed(1) :
+                                         category === 'Fats' ? ((item.fats/current_fats)*100).toFixed(1) :
+                                         null
+                                         }
+                                        {'%)'}
                                         
-                                        {'Serving: ' + item.serving + '•' + category === 'Energy'
-                                            ? 'Energy: ' + item.calories * item.serving + ' kcal'
-                                            : category === 'Carbs' ? 'Carbs' + item.carbs * item.serving + ' g'
-                                            : category === 'Proteins' ? 'Proteins' + item.proteins * item.serving + ' g'
-                                            : category === 'Fats' ? 'Fats' + item.fats * item.serving + ' g'
-                                            : null
-                                            }
+                                        
                                     </Text>
                                 </View>
 

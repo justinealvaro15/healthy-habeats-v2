@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View, ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import * as ThemeConstants from '../common/Themes';
 
@@ -7,7 +8,7 @@ import IntakeFoodContainer from '../components/IntakeFoodContainer';
 
 
 
-const FoodListScreen = () => {
+const FoodListScreen = ({navigation}) => {
 
 
     const current_breakfast = navigation.getParam('current_breakfast');
@@ -15,7 +16,13 @@ const FoodListScreen = () => {
     const current_dinner = navigation.getParam('current_dinner');
     const current_snacks = navigation.getParam('current_snacks');
     const current_energy = navigation.getParam('current_energy');
+    const current_carbs = navigation.getParam('current_carbs');
+    const current_proteins = navigation.getParam('current_proteins');
+    const current_fats = navigation.getParam('current_fats');
     const total_energy = navigation.getParam('total_energy');
+    const total_carbs = navigation.getParam('total_carbs');
+    const total_proteins = navigation.getParam('total_proteins');
+    const total_fats = navigation.getParam('total_fats');
     const breakfast = navigation.getParam('breakfast');
     const lunch = navigation.getParam('lunch');
     const dinner = navigation.getParam('dinner');
@@ -33,13 +40,29 @@ const FoodListScreen = () => {
     const token = navigation.getParam('token');
     const setIsModified = navigation.getParam('setIsModified');
     const setIsDeleted = navigation.getParam('setIsDeleted');
+    const category = navigation.getParam('category');
 
     return(
         <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
 
             <View>
                 <Text>FOOD LIST PAGE</Text>
-                <Text>ENERGY: {current_energy}/{total_energy} kcal</Text>
+                <Text>
+                    {category + ': '}
+                    {category === 'Energy' ? current_energy : 
+                     category === 'Carbs' ? current_carbs :
+                     category === 'Proteins' ? current_proteins :
+                     category === 'Fats' ? current_fats :
+                     null
+                    }
+                    {'/'}
+                    {category === 'Energy' ? total_energy : 
+                     category === 'Carbs' ? total_carbs :
+                     category === 'Proteins' ? total_proteins :
+                     category === 'Fats' ? total_fats :
+                     null
+                    }
+                </Text>
             </View>
 
 
@@ -64,7 +87,11 @@ const FoodListScreen = () => {
                 setFoodArray1 = {setBreakfast}
                 token = {token}
                 setIsModified = {setIsModified}
-                category = "Energy"
+                category = {category}
+                current_energy = {current_energy}
+                current_carbs = {current_carbs}
+                current_proteins = {current_proteins}
+                current_fats = {current_fats}
             />
 
             <IntakeFoodContainer
@@ -88,7 +115,11 @@ const FoodListScreen = () => {
                 setFoodArray1 = {setLunch}
                 token = {token}
                 setIsModified = {setIsModified}
-                category = "Energy"
+                category = {category}
+                current_energy = {current_energy}
+                current_carbs = {current_carbs}
+                current_proteins = {current_proteins}
+                current_fats = {current_fats}
             />
 
             <IntakeFoodContainer
@@ -112,7 +143,11 @@ const FoodListScreen = () => {
                 setFoodArray1 = {setDinner}
                 token = {token}
                 setIsModified = {setIsModified}
-                category = "Energy"
+                category = {category}
+                current_energy = {current_energy}
+                current_carbs = {current_carbs}
+                current_proteins = {current_proteins}
+                current_fats = {current_fats}
             />
 
             <IntakeFoodContainer
@@ -136,7 +171,11 @@ const FoodListScreen = () => {
                 setFoodArray1 = {setSnacks}
                 token = {token}
                 setIsModified = {setIsModified}
-                category = "Energy"
+                category = {category}
+                current_energy = {current_energy}
+                current_carbs = {current_carbs}
+                current_proteins = {current_proteins}
+                current_fats = {current_fats}
             />
         </ScrollView>
     );

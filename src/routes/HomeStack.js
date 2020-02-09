@@ -47,7 +47,10 @@ const screens = {
         screen: StatsDetail
     },
     FoodList: {
-        screen: FoodListScreen
+        screen: FoodListScreen,
+        navigationOptions: {
+            title: 'FOODLISTSCREEN'
+        }
     }
 };
 
