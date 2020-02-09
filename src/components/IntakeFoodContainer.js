@@ -80,10 +80,10 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                                         
                                         {category === 'Energy' ? ' kcal ' : ' g '}
                                         {'('}
-                                        {category === 'Energy' ? ((item.calories/current_energy)*100).toFixed(1) : 
-                                         category === 'Carbs' ? ((item.carbs/current_carbs)*100).toFixed(1) :
-                                         category === 'Proteins' ? ((item.proteins/current_proteins)*100).toFixed(1) :
-                                         category === 'Fats' ? ((item.fats/current_fats)*100).toFixed(1) :
+                                        {category === 'Energy' ? (((item.calories * item.serving)/current_energy)*100).toFixed(1) : 
+                                         category === 'Carbs' ? (((item.carbs * item.serving))*100).toFixed(1) :
+                                         category === 'Proteins' ? (((item.proteins * item.serving))*100).toFixed(1) :
+                                         category === 'Fats' ? (((item.fats * item.serving))*100).toFixed(1) :
                                          null
                                          }
                                         {'%)'}
