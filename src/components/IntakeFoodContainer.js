@@ -70,7 +70,14 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                                 <View>
                                     <Text style={styles.text_regular}>{item.foodName}</Text>
                                     <Text style={styles.text_small}>
-                                        {'Serving: ' + item.serving + ' • ' + category + ': ' + item.calories * item.serving}
+                                        {'Serving: ' + item.serving + ' • ' + category + ': '} 
+                                        {category === 'Energy' ? item.calories * item.serving : 
+                                         category === 'Carbs' ? item.carbs * item.serving :
+                                         category === 'Proteins' ? item.proteins * item.serving :
+                                         category === 'Fats' ? item.fats * item.serving :
+                                         null
+                                         }
+                                        
                                         {category === 'Energy' ? ' kcal ' : ' g '}
                                         {'('}
                                         {category === 'Energy' ? ((item.calories/current_energy)*100).toFixed(1) : 
