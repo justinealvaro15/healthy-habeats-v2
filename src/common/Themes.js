@@ -5,11 +5,13 @@ export const MAIN_YELLOW = '#F4B400';
 export const MAIN_GREEN = '#0F9D58';
 export const MAIN_RED = '#DB4437';
 
+export const HIGHLIGHT_BLUE = '#408CC0';
 export const HIGHLIGHT_YELLOW = '#FFD309';
 export const HIGHLIGHT_GREEN = '#8AC64C';
-// export const HIGHLIGHT_RED = '#EF5637';
+export const HIGHLIGHT_RED = '#EF5637';
 export const HIGHLIGHT_GRAY = '#EFEFF0';
 
+export const ICON_GRAY = '#BCBBBE';
 export const BORDER_GRAY = '#D1D0D4';
 export const FONT_GRAY = '#808080';
 

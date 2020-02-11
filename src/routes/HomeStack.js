@@ -49,7 +49,7 @@ const screens = {
     FoodList: {
         screen: FoodListScreen,
         navigationOptions: {
-            title: 'FOODLISTSCREEN'
+            title: 'View food intake'
         }
     }
 };
