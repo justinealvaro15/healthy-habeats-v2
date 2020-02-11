@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, Alert, AsyncStorage, ScrollView, StyleSheet, View } from 'react-native';
-
+import { ActivityIndicator, Alert, AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 
-import IntakeFoodContainer from '../components/IntakeFoodContainer';
 import StatsContainer from '../components/StatsContainer';
-import FoodListScreen from '../screens/FoodListScreen';
-
+import { Feather } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
 
@@ -539,72 +536,162 @@ const HomeScreen = ({ navigation }) => {
     }
 
     return(
-        <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
-            <CalendarStrip
-                style={styles.calendar}
-                daySelectionAnimation={{type: 'background', duration: 200, highlightColor: ThemeConstants.MAIN_YELLOW}}
-                calendarHeaderStyle={{color: 'white'}}
-                calendarColor={ThemeConstants.MAIN_BLUE}
-                dateNumberStyle={{color: 'white'}}
-                dateNameStyle={{color: 'white'}}
-                highlightDateNumberStyle={{color: 'white'}}
-                highlightDateNameStyle={{color: 'white'}}
-                disabledDateNameStyle={{color: 'grey'}}
-                disabledDateNumberStyle={{color: 'grey'}}
-                onDateSelected={(onDateSelected) => {
-                    var currentDateSelected = moment(onDateSelected).format('MMMM DD YYYY');
-                    setDateSelected(currentDateSelected);
-                    setDateMoment(moment(onDateSelected));
-                }}
-            />
-            
+        <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', flexDirection: 'column' }}
+            showsVerticalScrollIndicator={false}
+        >
             <View>
-                <View style={styles.padding}></View>
-
-                <StatsContainer
-                    valuesTotal = {userData}
-                    valuesCurrent = {current}
-                    category = {''}
-                    variables = {{
-                        current_breakfast: current_breakfast,
-                        current_lunch: current_lunch,
-                        current_dinner: current_dinner,
-                        current_snacks: current_snacks,
-                        current_energy: current.current_calories, 
-                        current_carbs: current.current_carbs, 
-                        current_proteins: current.current_proteins, 
-                        current_fats: current.current_fats, 
-                        total_energy: userData.calories,
-                        total_carbs: userData.carbs,
-                        total_proteins: userData.proteins,
-                        total_fats: userData.fats,
-                        breakfast: breakfast,
-                        lunch: lunch,
-                        dinner: dinner,
-                        snacks: snacks,
-                        setBreakfast: setBreakfast,
-                        setLunch: setLunch,
-                        setDinner: setDinner,
-                        setSnacks: setSnacks,
-                        setCurrentBreakfast: setCurrentBreakfast,
-                        setCurrentLunch: setCurrentLunch,
-                        setCurrentDinner: setCurrentDinner,
-                        setCurrentSnacks: setCurrentSnacks,
-                        dateSelected: dateSelected,
-                        dateMoment: dateMoment,
-                        token: token,
-                        setIsModified: setIsModified,
-                        setIsDeleted: setIsDeleted,
-                        category: ''
+                <CalendarStrip
+                    style={styles.calendar}
+                    daySelectionAnimation={{type: 'background', duration: 200, highlightColor: ThemeConstants.MAIN_YELLOW}}
+                    calendarHeaderStyle={{color: 'white'}}
+                    calendarColor={ThemeConstants.MAIN_BLUE}
+                    dateNumberStyle={{color: 'white'}}
+                    dateNameStyle={{color: 'white'}}
+                    highlightDateNumberStyle={{color: 'white'}}
+                    highlightDateNameStyle={{color: 'white'}}
+                    disabledDateNameStyle={{color: 'grey'}}
+                    disabledDateNumberStyle={{color: 'grey'}}
+                    onDateSelected={(onDateSelected) => {
+                        var currentDateSelected = moment(onDateSelected).format('MMMM DD YYYY');
+                        setDateSelected(currentDateSelected);
+                        setDateMoment(moment(onDateSelected));
                     }}
-                 
                 />
+                
+                <View>
+                    <View style={styles.padding}></View>
+
+                    <StatsContainer
+                        valuesTotal = {userData}
+                        valuesCurrent = {current}
+                        category = {''}
+                        variables = {{
+                            current_breakfast: current_breakfast,
+                            current_lunch: current_lunch,
+                            current_dinner: current_dinner,
+                            current_snacks: current_snacks,
+                            current_energy: current.current_calories,
+                            current_carbs: current.current_carbs,
+                            current_proteins: current.current_proteins,
+                            current_fats: current.current_fats,
+                            total_energy: userData.calories,
+                            total_carbs: userData.carbs,
+                            total_proteins: userData.proteins,
+                            total_fats: userData.fats,
+                            breakfast: breakfast,
+                            lunch: lunch,
+                            dinner: dinner,
+                            snacks: snacks,
+                            setBreakfast: setBreakfast,
+                            setLunch: setLunch,
+                            setDinner: setDinner,
+                            setSnacks: setSnacks,
+                            setCurrentBreakfast: setCurrentBreakfast,
+                            setCurrentLunch: setCurrentLunch,
+                            setCurrentDinner: setCurrentDinner,
+                            setCurrentSnacks: setCurrentSnacks,
+                            dateSelected: dateSelected,
+                            dateMoment: dateMoment,
+                            token: token,
+                            setIsModified: setIsModified,
+                            setIsDeleted: setIsDeleted,
+                            category: ''
+                        }}
+                    />
+                </View>
+            </View>
+
+            <View style={{ justifyContent: 'flex-end', marginBottom: ThemeConstants.CONTAINER_MARGIN+10 }}>
+                <View style={{ flexDirection: 'row', marginHorizontal: ThemeConstants.CONTAINER_MARGIN+15, marginBottom: 15 }}>
+                    <TouchableHighlight
+                        style={[styles.button_add, {marginRight: 15, backgroundColor: ThemeConstants.MAIN_GREEN}]}
+                        onPress={() => navigation.navigate('SearchFood', {
+                            foodArray: breakfast,
+                            setFoodArray: setBreakfast,
+                            currentDate: dateMoment,
+                            deleteID: 0,
+                            mealTitle: 'Breakfast',
+                            userID: token,
+                            setIsModified: setIsModified
+                        })}
+                        underlayColor={ThemeConstants.HIGHLIGHT_GREEN}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
+                            <Feather name={'plus-circle'} size={23} style={{color: ThemeConstants.MAIN_WHITE, marginRight: 7}}/>
+                            <Text style={styles.text_button}>Breakfast</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                        style={[styles.button_add, {backgroundColor: ThemeConstants.MAIN_RED}]}
+                        onPress={() => navigation.navigate('SearchFood', {
+                            foodArray: lunch,
+                            setFoodArray: setLunch,
+                            currentDate: dateMoment,
+                            deleteID: 0,
+                            mealTitle: 'Lunch',
+                            userID: token,
+                            setIsModified: setIsModified
+                        })}
+                        underlayColor={ThemeConstants.HIGHLIGHT_RED}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
+                            <Feather name={'plus-circle'} size={23} style={{color: ThemeConstants.MAIN_WHITE, marginRight: 7}}/>
+                            <Text style={styles.text_button}>Lunch</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
+
+                <View style={{ flexDirection: 'row', marginHorizontal: ThemeConstants.CONTAINER_MARGIN+15 }}>
+                    <TouchableHighlight
+                        style={[styles.button_add, {marginRight: 15, backgroundColor: ThemeConstants.MAIN_YELLOW}]}
+                        onPress={() => navigation.navigate('SearchFood', {
+                            foodArray: dinner,
+                            setFoodArray: setDinner,
+                            currentDate: dateMoment,
+                            deleteID: 0,
+                            mealTitle: 'Dinner',
+                            userID: token,
+                            setIsModified: setIsModified
+                        })}
+                        underlayColor={ThemeConstants.HIGHLIGHT_YELLOW}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
+                            <Feather name={'plus-circle'} size={23} style={{color: ThemeConstants.MAIN_WHITE, marginRight: 7}}/>
+                            <Text style={styles.text_button}>Dinner</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                        style={[styles.button_add, {backgroundColor: ThemeConstants.MAIN_BLUE}]}
+                        onPress={() => navigation.navigate('SearchFood', {
+                            foodArray: snacks,
+                            setFoodArray: setSnacks,
+                            currentDate: dateMoment,
+                            deleteID: 0,
+                            mealTitle: 'Snacks',
+                            userID: token,
+                            setIsModified: setIsModified
+                        })}
+                        underlayColor={ThemeConstants.HIGHLIGHT_BLUE}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
+                            <Feather name={'plus-circle'} size={23} style={{color: ThemeConstants.MAIN_WHITE, marginRight: 7}}/>
+                            <Text style={styles.text_button}>Snacks</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
             </View>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
+    button_add: {
+        borderRadius: ThemeConstants.CONTAINER_RADIUS,
+        flex: 1,
+    },
     calendar: {
         height: 100,
         paddingTop: 15,
@@ -623,7 +710,15 @@ const styles = StyleSheet.create({
     },
     stats: {
         position: 'relative',
-    }
+    },
+    text_button: {
+        alignContent: 'center',
+        color: ThemeConstants.MAIN_WHITE,
+        fontSize: ThemeConstants.FONT_SIZE_REGULAR,
+        fontWeight: 'bold',
+        marginVertical: ThemeConstants.CONTAINER_MARGIN/2,
+        textAlign: 'center'
+    },
 });
 
 export default HomeScreen;

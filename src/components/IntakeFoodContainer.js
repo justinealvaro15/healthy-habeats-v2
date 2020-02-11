@@ -4,14 +4,14 @@ import { Feather } from '@expo/vector-icons'
 import { withNavigation } from 'react-navigation';
 import * as ThemeConstants from '../common/Themes';
 
-
 import * as firebase from 'firebase';
 import '@firebase/firestore';
+
 // FOODARRAY: contains list of foods in a particular setting
 // when pressed => FOODARRAY[INDEX] get the food object
 // after deletion setFoodArray to
 
-const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation, category, current_energy, current_carbs, current_proteins, current_fats }) => {
+const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation, category, currentStat, totalStat }) => {
     const firebaseRef = firebase.database().ref();
     const meal = onDeletion5;
     const foodArray = food;
@@ -22,24 +22,9 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
     const dateSelected = onDeletion4;
 
     const setFoodArray = onDeletion;
-    
     const setIsDeleted = onDeletion2;
     const setTotalFoodArray = onDeletion3;
 
-
-    /*const getUserID = async () => {
-        try {
-            const userID = await AsyncStorage.getItem('userID');
-            userTokenID = userID;
-            console.log(userID);
-            console.log(userTokenID);
-		} catch (error) {
-			// Error retrieving data
-			console.log(error.message);
-		}      
-    };*/
-
-    
     return(
         <View style={styles.container}>
             <View style={styles.details}>
@@ -53,7 +38,6 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                         return (
                             <TouchableOpacity style={styles.food}
                                 onPress = { () => {
-                                    // console.log(item);
                                     navigation.navigate('EditServing',{
                                         foodArray: foodArray1,
                                         setFoodArray: setFoodArray1,
@@ -63,32 +47,23 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                                         userID: token,
                                         setIsModified: setIsModified
                                     });
-                                }
-
-                                }
+                                }}
                             >
                                 <View>
                                     <Text style={styles.text_regular}>{item.foodName}</Text>
                                     <Text style={styles.text_small}>
-                                        {'Serving: ' + item.serving + ' • ' + category + ': '} 
-                                        {category === 'Energy' ? item.calories * item.serving : 
-                                         category === 'Carbs' ? item.carbs * item.serving :
-                                         category === 'Proteins' ? item.proteins * item.serving :
-                                         category === 'Fats' ? item.fats * item.serving :
-                                         null
-                                         }
+                                        Serving: {item.serving} • {category}: {currentStat} 
                                         
                                         {category === 'Energy' ? ' kcal ' : ' g '}
-                                        {'('}
-                                        {category === 'Energy' ? (((item.calories * item.serving)/current_energy)*100).toFixed(1) : 
-                                         category === 'Carbs' ? (((item.carbs * item.serving)/current_carbs)*100).toFixed(1) :
-                                         category === 'Proteins' ? (((item.proteins * item.serving)/current_proteins)*100).toFixed(1) :
-                                         category === 'Fats' ? (((item.fats * item.serving)/current_fats)*100).toFixed(1) :
-                                         null
-                                         }
-                                        {'%)'}
-                                        
-                                        
+                                        (
+                                        {
+                                            category === 'Energy' ? (((item.calories*item.serving)/totalStat)*100).toFixed(1) : 
+                                            category === 'Carbs' ? (((item.carbs*item.serving)/totalStat)*100).toFixed(1) :
+                                            category === 'Proteins' ? (((item.proteins*item.serving)/totalStat)*100).toFixed(1) :
+                                            category === 'Fats' ? (((item.fats*item.serving)/totalStat)*100).toFixed(1) :
+                                            null
+                                        }
+                                        %) 
                                     </Text>
                                 </View>
 
@@ -154,18 +129,6 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                         )
                     }}
                 />
-            </View>
-
-            <View>
-                <TouchableHighlight
-                    style={styles.button_add}
-                    onPress={navigateToSearchFood}
-                    underlayColor={ThemeConstants.HIGHLIGHT_YELLOW}
-                >
-                    <View>
-                        <Text style={styles.text_button}>Add {mealTitle}</Text>
-                    </View>
-                </TouchableHighlight>
             </View>
         </View>
     );
