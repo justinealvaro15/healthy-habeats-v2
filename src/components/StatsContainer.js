@@ -16,14 +16,6 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             current_lunch: variables.current_lunch,
                             current_dinner: variables.current_dinner,
                             current_snacks: variables.current_snacks,
-                            current_energy: variables.current_energy, 
-                            current_carbs: variables.current_carbs, 
-                            current_proteins: variables.current_proteins, 
-                            current_fats: variables.current_fats, 
-                            total_energy: variables.total_energy,
-                            total_carbs: variables.total_carbs,
-                            total_proteins: variables.total_proteins,
-                            total_fats: variables.total_fats,
                             breakfast: variables.breakfast,
                             lunch: variables.lunch,
                             dinner: variables.dinner,
@@ -41,10 +33,12 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             token: variables.token,
                             setIsModified: variables.setIsModified,
                             setIsDeleted: variables.setIsDeleted,
-                            category: 'Energy'
+                            category: 'Energy',
+                            currentStat: variables.current_energy,
+                            totalStat: variables.total_energy,
+                            imageUri: require('../../assets/icons/energy.png')
                         });
-                        }
-                    }
+                    }}
                     underlayColor={ThemeConstants.HIGHLIGHT_GRAY}
                 >
                     <View style={{ alignItems: 'center' }}>
@@ -66,14 +60,6 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             current_lunch: variables.current_lunch,
                             current_dinner: variables.current_dinner,
                             current_snacks: variables.current_snacks,
-                            current_energy: variables.current_energy, 
-                            current_carbs: variables.current_carbs, 
-                            current_proteins: variables.current_proteins, 
-                            current_fats: variables.current_fats, 
-                            total_energy: variables.total_energy,
-                            total_carbs: variables.total_carbs,
-                            total_proteins: variables.total_proteins,
-                            total_fats: variables.total_fats,
                             breakfast: variables.breakfast,
                             lunch: variables.lunch,
                             dinner: variables.dinner,
@@ -91,10 +77,12 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             token: variables.token,
                             setIsModified: variables.setIsModified,
                             setIsDeleted: variables.setIsDeleted,
-                            category: 'Carbs'
+                            category: 'Carbs',
+                            currentStat: variables.current_carbs,
+                            totalStat: variables.total_carbs,
+                            imageUri: require('../../assets/icons/carbs.png')
                         });
-                        }
-                    }
+                    }}
                     underlayColor={ThemeConstants.HIGHLIGHT_GRAY}
                 >
                     <View style={{ alignItems: 'center' }}>
@@ -118,14 +106,6 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             current_lunch: variables.current_lunch,
                             current_dinner: variables.current_dinner,
                             current_snacks: variables.current_snacks,
-                            current_energy: variables.current_energy, 
-                            current_carbs: variables.current_carbs, 
-                            current_proteins: variables.current_proteins, 
-                            current_fats: variables.current_fats, 
-                            total_energy: variables.total_energy,
-                            total_carbs: variables.total_carbs,
-                            total_proteins: variables.total_proteins,
-                            total_fats: variables.total_fats,
                             breakfast: variables.breakfast,
                             lunch: variables.lunch,
                             dinner: variables.dinner,
@@ -143,10 +123,12 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             token: variables.token,
                             setIsModified: variables.setIsModified,
                             setIsDeleted: variables.setIsDeleted,
-                            category: 'Proteins'
+                            category: 'Proteins',
+                            currentStat: variables.current_proteins,
+                            totalStat: variables.total_proteins,
+                            imageUri: require('../../assets/icons/protein.png')
                         });
-                        }
-                    }
+                    }}
                     underlayColor={ThemeConstants.HIGHLIGHT_GRAY}
                 >
                     <View style={{ alignItems: 'center' }}>
@@ -168,14 +150,6 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             current_lunch: variables.current_lunch,
                             current_dinner: variables.current_dinner,
                             current_snacks: variables.current_snacks,
-                            current_energy: variables.current_energy, 
-                            current_carbs: variables.current_carbs, 
-                            current_proteins: variables.current_proteins, 
-                            current_fats: variables.current_fats, 
-                            total_energy: variables.total_energy,
-                            total_carbs: variables.total_carbs,
-                            total_proteins: variables.total_proteins,
-                            total_fats: variables.total_fats,
                             breakfast: variables.breakfast,
                             lunch: variables.lunch,
                             dinner: variables.dinner,
@@ -193,10 +167,12 @@ const StatsContainer = ({ valuesTotal, valuesCurrent, variables, navigation }) =
                             token: variables.token,
                             setIsModified: variables.setIsModified,
                             setIsDeleted: variables.setIsDeleted,
-                            category: 'Fats'
+                            category: 'Fats',
+                            currentStat: variables.current_fats,
+                            totalStat: variables.total_fats,
+                            imageUri: require('../../assets/icons/fat.png')
                         });
-                        }
-                    }
+                    }}
                     underlayColor={ThemeConstants.HIGHLIGHT_GRAY}
                 >
                     <View style={{ alignItems: 'center' }}>
