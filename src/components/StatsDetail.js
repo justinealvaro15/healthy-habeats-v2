@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 import * as ThemeConstants from '../common/Themes';
 
 const lowIntakeThreshold = 0.75;
 const highIntakeThreshold = 1.0;
 
-const iconHeight = 110;
-const iconWidth = 110;
-const iconOpacity = 0.65;
+const iconHeight = 80;
+const iconWidth = 80;
 
 
-const StatsDetail = ({ valueTotal, valueCurrent }) => {
+const StatsDetail = ({ imageUri, valueTotal, valueCurrent }) => {
     const progress = valueCurrent/valueTotal ? valueCurrent/valueTotal : null;
 
     const [color, setColor] = useState(ThemeConstants.MAIN_YELLOW);
@@ -20,22 +19,22 @@ const StatsDetail = ({ valueTotal, valueCurrent }) => {
         if(progress <= lowIntakeThreshold){
             setColor(ThemeConstants.MAIN_YELLOW);
         } else if (progress <= highIntakeThreshold){
-            setColor(ThemeConstants.HIGHLIGHT_GREEN);
+            setColor(ThemeConstants.MAIN_GREEN);
         } else{
             setColor(ThemeConstants.MAIN_RED);
         }
     })
 
     return(
-       <View style={styles.dimensions}>
+       <View style={[styles.dimensions, styles.padding]}>
             <Image
-                source={require('../../assets/icons/test/broccoli-black.png')}
-                style={[styles.dimensions, styles.position]}
+                source={imageUri}
+                style={[styles.dimensions, styles.inactive, styles.position]}
             />
             <View style={styles.position}>
                 <View style={[styles.progress, {height: iconHeight*progress}]}>
                     <Image
-                        source={require('../../assets/icons/test/broccoli-black.png')}
+                        source={imageUri}
                         style={[styles.dimensions, {tintColor: color}]}
                     />
                 </View>
@@ -49,6 +48,13 @@ const styles = StyleSheet.create({
         height: iconHeight,
         width: iconWidth
     },
+    inactive: {
+        tintColor: ThemeConstants.ICON_GRAY
+    },
+    padding: {
+        marginBottom: ThemeConstants.CONTAINER_MARGIN/2,
+        marginTop: ThemeConstants.CONTAINER_MARGIN/3
+    },
     position: {
         bottom: 0,
         position: 'absolute'
@@ -56,7 +62,6 @@ const styles = StyleSheet.create({
     progress: {
         flexDirection: 'row',
         alignItems: 'flex-end',
-        opacity: iconOpacity,
         overflow: 'hidden',
         width: iconWidth,
     }

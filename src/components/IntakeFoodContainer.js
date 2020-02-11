@@ -11,7 +11,7 @@ import '@firebase/firestore';
 // when pressed => FOODARRAY[INDEX] get the food object
 // after deletion setFoodArray to
 
-const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation, category, current_energy, current_carbs, current_proteins, current_fats }) => {
+const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDeletion3, onDeletion4, onDeletion5, foodArray1, setFoodArray1, token, setIsModified, navigation, category, current_energy, current_carbs, current_proteins, current_fats }) => {
     const firebaseRef = firebase.database().ref();
     const meal = onDeletion5;
     const foodArray = food;
@@ -72,19 +72,19 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                                     <Text style={styles.text_small}>
                                         {'Serving: ' + item.serving + ' • ' + category + ': '} 
                                         {category === 'Energy' ? item.calories * item.serving : 
-                                         category === 'Carbs' ? item.carbs * item.serving :
-                                         category === 'Proteins' ? item.proteins * item.serving :
-                                         category === 'Fats' ? item.fats * item.serving :
-                                         null
+                                            category === 'Carbs' ? item.carbs * item.serving :
+                                            category === 'Proteins' ? item.proteins * item.serving :
+                                            category === 'Fats' ? item.fats * item.serving :
+                                            null
                                          }
                                         
                                         {category === 'Energy' ? ' kcal ' : ' g '}
                                         {'('}
                                         {category === 'Energy' ? (((item.calories * item.serving)/current_energy)*100).toFixed(1) : 
-                                         category === 'Carbs' ? (((item.carbs * item.serving)/current_carbs)*100).toFixed(1) :
-                                         category === 'Proteins' ? (((item.proteins * item.serving)/current_proteins)*100).toFixed(1) :
-                                         category === 'Fats' ? (((item.fats * item.serving)/current_fats)*100).toFixed(1) :
-                                         null
+                                            category === 'Carbs' ? (((item.carbs * item.serving)/current_carbs)*100).toFixed(1) :
+                                            category === 'Proteins' ? (((item.proteins * item.serving)/current_proteins)*100).toFixed(1) :
+                                            category === 'Fats' ? (((item.fats * item.serving)/current_fats)*100).toFixed(1) :
+                                            null
                                          }
                                         {'%)'}
                                         
@@ -154,18 +154,6 @@ const IntakeFoodContainer = ({ food, mealTitle, navigateToSearchFood, onDeletion
                         )
                     }}
                 />
-            </View>
-
-            <View>
-                <TouchableHighlight
-                    style={styles.button_add}
-                    onPress={navigateToSearchFood}
-                    underlayColor={ThemeConstants.HIGHLIGHT_YELLOW}
-                >
-                    <View>
-                        <Text style={styles.text_button}>Add {mealTitle}</Text>
-                    </View>
-                </TouchableHighlight>
             </View>
         </View>
     );
