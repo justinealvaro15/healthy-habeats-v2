@@ -76,7 +76,15 @@ const FoodListScreen = ({navigation}) => {
                     deleteID: 0,
                     mealTitle: 'Breakfast',
                     userID: token,
-                    setIsModified: setIsModified
+                    setIsModified: setIsModified,
+                    current_energy: current_energy,
+                    current_carbs: current_carbs,
+                    current_proteins: current_proteins,
+                    current_fats: current_fats,
+                    total_energy: total_energy,
+                    total_carbs: total_carbs,
+                    total_proteins: total_proteins,
+                    total_fats: total_fats,
                 })}
                 onDeletion={setCurrentBreakfast}
                 onDeletion2={setIsDeleted}
@@ -104,7 +112,15 @@ const FoodListScreen = ({navigation}) => {
                     deleteID: 0,
                     mealTitle: 'Lunch',
                     userID: token,
-                    setIsModified: setIsModified
+                    setIsModified: setIsModified,
+                    current_energy: current_energy,
+                    current_carbs: current_carbs,
+                    current_proteins: current_proteins,
+                    current_fats: current_fats,
+                    total_energy: total_energy,
+                    total_carbs: total_carbs,
+                    total_proteins: total_proteins,
+                    total_fats: total_fats,
                 })}
                 onDeletion={setCurrentLunch}
                 onDeletion2={setIsDeleted}
@@ -132,7 +148,15 @@ const FoodListScreen = ({navigation}) => {
                     deleteID: 0,
                     mealTitle: 'Dinner',
                     userID: token,
-                    setIsModified: setIsModified
+                    setIsModified: setIsModified,
+                    current_energy: current_energy,
+                    current_carbs: current_carbs,
+                    current_proteins: current_proteins,
+                    current_fats: current_fats,
+                    total_energy: total_energy,
+                    total_carbs: total_carbs,
+                    total_proteins: total_proteins,
+                    total_fats: total_fats,
                 })}
                 onDeletion={setCurrentDinner}
                 onDeletion2={setIsDeleted}
@@ -160,7 +184,15 @@ const FoodListScreen = ({navigation}) => {
                     deleteID: 0,
                     mealTitle: 'Snacks',
                     userID: token,
-                    setIsModified: setIsModified
+                    setIsModified: setIsModified,
+                    current_energy: current_energy,
+                    current_carbs: current_carbs,
+                    current_proteins: current_proteins,
+                    current_fats: current_fats,
+                    total_energy: total_energy,
+                    total_carbs: total_carbs,
+                    total_proteins: total_proteins,
+                    total_fats: total_fats,
                 })}
                 onDeletion={setCurrentSnacks}
                 onDeletion2={setIsDeleted}

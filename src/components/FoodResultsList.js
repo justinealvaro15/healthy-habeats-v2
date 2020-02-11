@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
@@ -8,7 +8,7 @@ import * as ThemeConstants from '../common/Themes';
 import { DATABASE_LENGTH } from '../common/Constants';
 import * as foodData from '../../assets/foodDatabase.json';
 
-const FoodResultsList = ({ foodArray, setFoodArray, navigation, mealTitle ,results, currentDate, deleteID, userID, setIsModified }) => {
+const FoodResultsList = ({ foodArray, setFoodArray, navigation, mealTitle ,results, currentDate, deleteID, userID, setIsModified/*, current_energy, total_energy, current_carbs, total_carbs, current_proteins, total_proteins, current_fats, total_fats*/}) => {
     // results === [Food Items]; 
     //      used for filtering search
     // foodArray === [Food Items]; 
@@ -43,6 +43,7 @@ const FoodResultsList = ({ foodArray, setFoodArray, navigation, mealTitle ,resul
         results=results;
     }
 
+    
     return (
         <View style={styles.main}>
             <View style={styles.container}>
