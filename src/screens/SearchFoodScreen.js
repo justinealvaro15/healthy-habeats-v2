@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View, YellowBox } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import FoodResultsList from '../components/FoodResultsList';
@@ -9,14 +9,22 @@ import * as ThemeConstants from '../common/Themes';
 import { DATABASE_LENGTH } from '../common/Constants';
 import * as foodData from '../../assets/foodDatabase.json';
 
+
+
+YellowBox.ignoreWarnings([
+    'VirtualizedLists should never be nested',
+    'Setting a timer for a long period of time', // TODO: Remove when fixed
+]);
+
 // Store food item data
 const data = [];
 for (let i = 0; i < DATABASE_LENGTH; i++) {
     data.push(foodData[i]);
-}
+};
+
 
 const filterResultsBySearch = (term) => {
-    const foodArray=[];
+    const foodArray = [];
     //console.log(term);
     if(!term.length){
         return { };
@@ -25,7 +33,7 @@ const filterResultsBySearch = (term) => {
         for (let i = 0; i < DATABASE_LENGTH; i++) {
             if(((data[i].foodName).toUpperCase()).includes(string_to_check)){
                 const foodName = data[i].foodName;
-                const id = (data[i].id).toString();;
+                const id = (data[i].id).toString();
                 const grams = data[i].grams;
                 const calories = data[i].calories;
                 const carbs = data[i].carbs;
@@ -39,11 +47,13 @@ const filterResultsBySearch = (term) => {
             }
         };
         return foodArray;
+        
     }
 };
 
 const SearchFoodScreen = ({ navigation }) => {
     const [term, setTerm] = useState('');
+
 
     return (
         <View style={styles.main}>
@@ -66,6 +76,16 @@ const SearchFoodScreen = ({ navigation }) => {
                     userID = {navigation.getParam('userID')}
                     setIsModified = {navigation.getParam('setIsModified')}
                     results={filterResultsBySearch(term)}
+                    current_energy = {navigation.getParam('current_energy')}
+                    current_carbs = {navigation.getParam('current_carbs')}
+                    current_proteins = {navigation.getParam('current_proteins')}
+                    current_fats = {navigation.getParam('current_fats')}
+                    total_energy = {navigation.getParam('total_energy')}
+                    total_carbs = {navigation.getParam('total_carbs')}
+                    total_proteins = {navigation.getParam('total_proteins')}
+                    total_fats = {navigation.getParam('total_fats')}
+                    
+                    
                 />
             </ScrollView>
         </View>
