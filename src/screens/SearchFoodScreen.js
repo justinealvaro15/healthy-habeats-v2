@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View, YellowBox } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import FoodResultsList from '../components/FoodResultsList';
@@ -11,19 +11,10 @@ import * as foodData from '../../assets/foodDatabase.json';
 
 
 
-
-
-let current_energy = 0;
-let current_carbs = 0;
-let current_proteins = 0;
-let current_fats = 0;
-let total_energy = 0;
-let total_carbs = 0;
-let total_proteins = 0;
-let total_fats = 0;
-
-let foodArray=[];
-
+YellowBox.ignoreWarnings([
+    'VirtualizedLists should never be nested',
+    'Setting a timer for a long period of time', // TODO: Remove when fixed
+]);
 
 // Store food item data
 const data = [];
@@ -33,7 +24,7 @@ for (let i = 0; i < DATABASE_LENGTH; i++) {
 
 
 const filterResultsBySearch = (term) => {
-    
+    const foodArray = [];
     //console.log(term);
     if(!term.length){
         return { };
@@ -55,59 +46,14 @@ const filterResultsBySearch = (term) => {
                 foodArray.push({id, foodName, grams, calories, carbs, fats, proteins, dateConsumed, deleteID, serving, pieces});
             }
         };
-        sortFoodsHandler();
+        return foodArray;
         
     }
 };
 
-const sortFoodsHandler = () => {
-    //carbs is high
-    let sortedFoodArray = [];
-    if(current_fats >= total_fats * 0.55){
-        sortedFoodArray = [...foodArray].sort( (a,b) => a.fats - b.fats );
-    }
-    else if(current_proteins >= total_proteins * 0.55){
-        sortedFoodArray = [...foodArray].sort( (a,b) => a.proteins - b.proteins );
-    }
-    else if(current_carbs >= total_carbs * 0.55 ){
-       sortedFoodArray = [...foodArray].sort( (a,b) => a.carbs - b.carbs );
-    }
-    else if(current_energy >= total_energy * 0.55){
-        sortedFoodArray = [...foodArray].sort( (a,b) => a.calories - b.calories );
-    }
-    else{
-        sortedFoodArray = foodArray;
-    }
-    return sortedFoodArray;
-};
-
 const SearchFoodScreen = ({ navigation }) => {
     const [term, setTerm] = useState('');
-    
-    const temp_current_energy = navigation.getParam('current_energy');
-    const temp_current_carbs = navigation.getParam('current_carbs');
-    const temp_current_proteins = navigation.getParam('current_proteins');
-    const temp_current_fats = navigation.getParam('current_fats');
-    const temp_total_energy = navigation.getParam('total_energy');
-    const temp_total_carbs = navigation.getParam('total_carbs');
-    const temp_total_proteins = navigation.getParam('total_proteins');
-    const temp_total_fats = navigation.getParam('total_fats');
 
-    
-    current_energy = temp_current_energy;
-    current_carbs = temp_current_carbs;
-    current_proteins = temp_current_proteins;
-    current_fats = temp_current_fats;
-    total_energy = temp_total_energy;
-    total_carbs = temp_total_carbs;
-    total_proteins = temp_total_proteins ;
-    total_fats = temp_total_fats;
-
-
-
-    useEffect( () => {
-        console.log('sorting...');
-    }, []);
 
     return (
         <View style={styles.main}>
@@ -130,6 +76,15 @@ const SearchFoodScreen = ({ navigation }) => {
                     userID = {navigation.getParam('userID')}
                     setIsModified = {navigation.getParam('setIsModified')}
                     results={filterResultsBySearch(term)}
+                    current_energy = {navigation.getParam('current_energy')}
+                    current_carbs = {navigation.getParam('current_carbs')}
+                    current_proteins = {navigation.getParam('current_proteins')}
+                    current_fats = {navigation.getParam('current_fats')}
+                    total_energy = {navigation.getParam('total_energy')}
+                    total_carbs = {navigation.getParam('total_carbs')}
+                    total_proteins = {navigation.getParam('total_proteins')}
+                    total_fats = {navigation.getParam('total_fats')}
+                    
                     
                 />
             </ScrollView>

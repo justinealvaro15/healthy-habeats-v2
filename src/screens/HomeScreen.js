@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, Alert, AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { ActivityIndicator, Alert, AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View, YellowBox } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 
@@ -10,6 +10,11 @@ import '@firebase/firestore';
 
 import * as ThemeConstants from '../common/Themes';
 import * as PopupText from '../common/NotificationsText';
+
+YellowBox.ignoreWarnings([
+    'VirtualizedLists should never be nested',
+    'Setting a timer for a long period of time', // TODO: Remove when fixed
+]);
 
 let firstSync = 0;
 
@@ -508,7 +513,7 @@ const HomeScreen = ({ navigation }) => {
             setIsReinitialized(false);
         };
         firstSync = 1;
-       // console.log("useEffect#7 in action: data is deleted");
+        console.log("useEffect#7 in action: data is deleted");
     }, [isDeleted]);
 
     useEffect( () => {
@@ -613,7 +618,15 @@ const HomeScreen = ({ navigation }) => {
                             deleteID: 0,
                             mealTitle: 'Breakfast',
                             userID: token,
-                            setIsModified: setIsModified
+                            setIsModified: setIsModified,
+                            current_energy: current.current_calories,
+                            current_carbs: current.current_carbs,
+                            current_proteins: current.current_proteins,
+                            current_fats: current.current_fats,
+                            total_energy: userData.calories,
+                            total_carbs: userData.carbs,
+                            total_proteins: userData.proteins,
+                            total_fats: userData.fats,
                         })}
                         underlayColor={ThemeConstants.HIGHLIGHT_GREEN}
                     >
@@ -632,7 +645,15 @@ const HomeScreen = ({ navigation }) => {
                             deleteID: 0,
                             mealTitle: 'Lunch',
                             userID: token,
-                            setIsModified: setIsModified
+                            setIsModified: setIsModified,
+                            current_energy: current.current_calories,
+                            current_carbs: current.current_carbs,
+                            current_proteins: current.current_proteins,
+                            current_fats: current.current_fats,
+                            total_energy: userData.calories,
+                            total_carbs: userData.carbs,
+                            total_proteins: userData.proteins,
+                            total_fats: userData.fats,
                         })}
                         underlayColor={ThemeConstants.HIGHLIGHT_RED}
                     >
@@ -653,7 +674,15 @@ const HomeScreen = ({ navigation }) => {
                             deleteID: 0,
                             mealTitle: 'Dinner',
                             userID: token,
-                            setIsModified: setIsModified
+                            setIsModified: setIsModified,
+                            current_energy: current.current_calories,
+                            current_carbs: current.current_carbs,
+                            current_proteins: current.current_proteins,
+                            current_fats: current.current_fats,
+                            total_energy: userData.calories,
+                            total_carbs: userData.carbs,
+                            total_proteins: userData.proteins,
+                            total_fats: userData.fats,
                         })}
                         underlayColor={ThemeConstants.HIGHLIGHT_YELLOW}
                     >
@@ -672,7 +701,15 @@ const HomeScreen = ({ navigation }) => {
                             deleteID: 0,
                             mealTitle: 'Snacks',
                             userID: token,
-                            setIsModified: setIsModified
+                            setIsModified: setIsModified,
+                            current_energy: current.current_calories,
+                            current_carbs: current.current_carbs,
+                            current_proteins: current.current_proteins,
+                            current_fats: current.current_fats,
+                            total_energy: userData.calories,
+                            total_carbs: userData.carbs,
+                            total_proteins: userData.proteins,
+                            total_fats: userData.fats,
                         })}
                         underlayColor={ThemeConstants.HIGHLIGHT_BLUE}
                     >

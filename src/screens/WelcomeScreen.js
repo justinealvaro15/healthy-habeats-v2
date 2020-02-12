@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, Dimensions, Image, StyleSheet, Text, Vibration, View } from 'react-native';
+import { AsyncStorage, Dimensions, Image, StyleSheet, Text, Vibration, View, YellowBox } from 'react-native';
 
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
@@ -11,6 +11,10 @@ import '@firebase/firestore';
 
 import * as NotificationsText from '../common/NotificationsText';
 
+YellowBox.ignoreWarnings([
+    'VirtualizedLists should never be nested',
+    'Setting a timer for a long period of time', // TODO: Remove when fixed
+]);
 
 const TIMER = 3000;
 const dimensions = Dimensions.get('window');
@@ -137,7 +141,7 @@ export default class WelcomeScreen extends React.Component {
 		//notif#1 check: current_hour > 7am, set notif for 7am tommorow 
 		if(hour >= 7){
 			time1 = new Date(year, month, tomorrow_date, 7); //7am tomorrow
-			console.log('tom');
+			//console.log('tom');
 		} else{
 			time1 = new Date(year, month, current_date, 7); //7am today
 		};
@@ -146,20 +150,20 @@ export default class WelcomeScreen extends React.Component {
 			time2 = new Date(year, month, tomorrow_date, 12); //12nn
 		} else{
 			time2 = new Date(year, month, current_date, 12); //12nn
-			console.log('today');
+			//console.log('today');
 		};
 
 		if(hour >= 19){
 			time3 = new Date(year, month, tomorrow_date, 19); //7pm
 		} else{
 			time3 = new Date(year, month, current_date, 19); //7pm
-			console.log('today');
+			//console.log('today');
 		};
 
 		//tips/notifs
 		if(hour >= 10){
 			time4 = new Date(year, month, tomorrow_date, 10); //10am
-			console.log('tom');
+			//console.log('tom');
 		} else{
 			time4 = new Date(year, month, current_date, 10); //10am
 		};
@@ -168,7 +172,7 @@ export default class WelcomeScreen extends React.Component {
 			time5 = new Date(year, month, tomorrow_date, 16); //4pm
 		} else{
 			time5 = new Date(year, month, current_date, 16); //4pm
-			console.log('today');
+			//console.log('today');
 		};
 
 		time1 = Date.parse(time1);

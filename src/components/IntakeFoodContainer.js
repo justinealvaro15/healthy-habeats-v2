@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, AsyncStorage, FlatList, Keyboard, StyleSheet, Text, ToastAndroid, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import { withNavigation } from 'react-navigation';
@@ -25,13 +25,20 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
     const setIsDeleted = onDeletion2;
     const setTotalFoodArray = onDeletion3;
 
+    let view_foods = x_date;
+    
+    useEffect( () => {
+        console.log('Deleted');
+        console.log(view_foods);
+    }, [isDelete]); 
+
     return(
         <View style={styles.container}>
             <View style={styles.details}>
                 <Text style={styles.text_header}>{mealTitle}</Text>
             
                 <FlatList
-                    data={x_date}
+                    data={view_foods}
                     keyExtractor = {(item) => (item.deleteID).toString()}
                     showsVerticalScrollIndicator={false}
                     renderItem={({item,index})=>{
@@ -103,11 +110,15 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                                         
                                                         if (x.length == 0){
                                                             setFoodArray([]);
+                                                            view_foods = [];
+                                                            console.log(view_foods);
                                                             setIsDeleted(Math.random());
                                                             setIsDelete(Math.random());
                                                             
                                                         }
                                                         else{
+                                                            view_foods = x;
+                                                            console.log(view_foods);
                                                             setFoodArray(x); //current meal we are setting breakfast to contain
                                                             setTotalFoodArray(meal);
                                                             setIsDeleted(Math.random());
@@ -117,6 +128,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                                         firebaseRef.child('Users').child(token).child('Food Intakes').child(mealTitle).set(temp);
 
                                                         ToastAndroid.show(`Removed ${item.foodName} successfully.`, ToastAndroid.SHORT);                                                        
+                                                        navigation.navigate('Home');
                                                     }
                                                 }
                                             ]
