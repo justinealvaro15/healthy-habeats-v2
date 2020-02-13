@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import PhoneCase from './PhoneCase';
 import StatsDetail from '../StatsDetail';
@@ -11,13 +11,25 @@ const StatsContainer = () => {
             <View style={styles.container}>
                 <View style={styles.details}>
                     <View style={styles.bar}>
-                        <StatsDetail style={styles.details} title='Energy' unit='kcal' valueTotal={2375} valueCurrent={500}/>
-                        <StatsDetail style={styles.details} title='Carbs' unit='g' valueTotal={380} valueCurrent={375}/>
-                    </View>
-        
-                    <View style={styles.bar}>
-                        <StatsDetail style={styles.details} title='Protein' unit='g' valueTotal={90} valueCurrent={69}/>
-                        <StatsDetail style={styles.details} title='Fat' unit='g' valueTotal={55} valueCurrent={125}/>
+                        <View style={{ alignItems: 'center' }}>
+                            <StatsDetail
+                                imageUri={require('../../../assets/icons/energy.png')}
+                                valueTotal={2375}
+                                valueCurrent={1500}
+                            />
+                            <Text style={styles.text_header}>Energy</Text>
+                            <Text style={styles.text_regular}>1500/2375 kcal</Text>
+                        </View>
+
+                        <View style={{ alignItems: 'center' }}>
+                            <StatsDetail
+                                imageUri={require('../../../assets/icons/carbs.png')}
+                                valueTotal={380}
+                                valueCurrent={355}
+                            />
+                            <Text style={styles.text_header}>Carbs</Text>
+                            <Text style={styles.text_regular}>355/380 g</Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -44,6 +56,13 @@ const styles = StyleSheet.create({
     details: {
         margin: ThemeConstants.CONTAINER_MARGIN*0.8,
     },
+    text_header: {
+        alignSelf: 'center',
+        fontWeight: 'bold'
+    },
+    text_regular: {
+        alignSelf: 'center'
+    }
 });
 
 export default StatsContainer;

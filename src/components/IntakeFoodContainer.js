@@ -36,7 +36,9 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
         <View style={styles.container}>
             <View style={styles.details}>
                 <Text style={styles.text_header}>{mealTitle}</Text>
-            
+
+                {x_date.length <= 0 ? <Text style={{ opacity: 0.35 }}>Log your food intake to fill this section.</Text> : null}
+
                 <FlatList
                     data={view_foods}
                     keyExtractor = {(item) => (item.deleteID).toString()}
