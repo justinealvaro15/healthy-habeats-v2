@@ -8,7 +8,8 @@ import * as ThemeConstants from '../../common/Themes';
 
 const TutorialFood = () => {
     const foodArray = [
-        { "id": "1", "foodName": "Beef Shawarma", "calories": 315, "serving": 1  }
+        { "id": "1", "foodName": "Beef Shawarma", "calories": 315, "serving": 1  },
+        { "id": "2", "foodName": "Rice", "calories": 250, "serving": 0.5  }
     ];
     
     const render_inside = () => {
@@ -41,10 +42,6 @@ const TutorialFood = () => {
                                 )
                             }}
                         />
-                    </View>
-
-                    <View style={styles.button_add}>
-                        <Text style={styles.text_button}>Add Breakfast</Text>
                     </View>
                 </View>
             </View>

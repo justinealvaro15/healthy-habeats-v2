@@ -11,7 +11,6 @@ import FoodListScreen from '../screens/FoodListScreen';
 
 import Header from '../components/Header';
 import { MAIN_BLUE, MAIN_WHITE } from '../common/Themes';
-import StatsDetail from '../components/StatsDetail';
 
 
 const screens = {
@@ -42,9 +41,6 @@ const screens = {
         navigationOptions: {
             header: null
         }
-    },
-    Test: {
-        screen: StatsDetail
     },
     FoodList: {
         screen: FoodListScreen,
