@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { AsyncStorage, Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
@@ -72,7 +72,7 @@ const FoodListScreen = ({ navigation }) => {
 			// Error retrieving data
 			console.log(error.message);
         }    
-        firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
+        firebaseRef.child('Users').child(token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
     };
     
 	const saveFoodListCounter = async (key,value) => {
