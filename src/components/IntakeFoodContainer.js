@@ -116,6 +116,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                                             console.log(view_foods);
                                                             setIsDeleted(Math.random());
                                                             setIsDelete(Math.random());
+                                                            setIsModified(1);
                                                             
                                                         }
                                                         else{
@@ -125,6 +126,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                                             setTotalFoodArray(meal);
                                                             setIsDeleted(Math.random());
                                                             setIsDelete(Math.random());
+                                                            setIsModified(1);
                                                         }
                                                         temp = meal;
                                                         firebaseRef.child('Users').child(token).child('Food Intakes').child(mealTitle).set(temp);
