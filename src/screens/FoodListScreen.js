@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
-
+import moment from 'moment';
 
 import * as ThemeConstants from '../common/Themes';
 
