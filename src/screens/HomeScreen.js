@@ -133,7 +133,7 @@ const HomeScreen = ({ navigation }) => {
 			// Error retrieving data
 			console.log(error.message);
         }    
-        firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('count').set(accessCounter.count);
+        firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
     };
     
 	const saveHomeCounter = async (key,value) => {
@@ -360,13 +360,13 @@ const HomeScreen = ({ navigation }) => {
                 carbs = carbs + (totalFood[i].carbs * totalFood[i].serving);
                 proteins = proteins + (totalFood[i].proteins * totalFood[i].serving);
                 fats = fats + (totalFood[i].fats * totalFood[i].serving);
-            }
+            };
             setCurrent({
                 current_calories: calories,
                 current_carbs: carbs,
                 current_proteins: proteins,
                 current_fats: fats
-            });
+            }).then(firebaseRef.child('Users').child(temp_token).child('Food Allowance').child(moment(dateSelected).format('MMMM DD YYYY')).set(current));
             saveCurrentUserData('current_calories', JSON.stringify(calories));
             saveCurrentUserData('current_carbs', JSON.stringify(carbs));
             saveCurrentUserData('current_proteins', JSON.stringify(proteins));
@@ -527,7 +527,7 @@ const HomeScreen = ({ navigation }) => {
             accessCounter.count+=1
             saveHomeCounter('home_counter', accessCounter);
             console.log('HomeScreen Counter: ' + accessCounter.count);
-            firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('count').set(accessCounter.count);	
+            firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
 		});
     },[]);
 

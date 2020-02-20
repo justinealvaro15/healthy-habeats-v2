@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import * as firebase from 'firebase';
+import '@firebase/firestore';
+
 
 import * as ThemeConstants from '../common/Themes';
 
@@ -8,6 +11,13 @@ import IntakeFoodContainer from '../components/IntakeFoodContainer';
 
 
 const FoodListScreen = ({ navigation }) => {
+
+    let accessCounter = {
+        count: 1,
+        dateAccessed:  moment().format('MMMM DD YYYY')
+    };
+    
+    const firebaseRef = firebase.database().ref();
     const current_breakfast = navigation.getParam('current_breakfast');
     const current_lunch = navigation.getParam('current_lunch');
     const current_dinner = navigation.getParam('current_dinner');
@@ -38,6 +48,55 @@ const FoodListScreen = ({ navigation }) => {
     const currentStat = navigation.getParam('currentStat');
     const totalStat = navigation.getParam('totalStat');
     const imageUri = navigation.getParam('imageUri');
+
+    const prepareCounter = async () => {
+		try {
+            let data = await AsyncStorage.getItem('foodList_counter') || 'empty';
+            
+			if(data === 'empty' ){
+				console.log('empty');
+            } else{
+                data = JSON.parse(data);
+                //same day
+                if(data.dateAccessed === moment().format('MMMM DD YYYY')){
+                    accessCounter.count = data.count; /*+ 1;*/
+                    accessCounter.dateAccessed = data.dateAccessed;
+                }
+                //next day
+                else{
+                    accessCounter.count = 1;
+                    accessCounter.dateAccessed = moment().format('MMMM DD YYYY');
+                }    
+			}
+		} catch (error) {
+			// Error retrieving data
+			console.log(error.message);
+        }    
+        firebaseRef.child('Users').child(temp_token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
+    };
+    
+	const saveFoodListCounter = async (key,value) => {
+		try {
+			
+			await AsyncStorage.setItem(key,JSON.stringify(value));
+			
+		} catch (error) {
+			// Error retrieving data
+			console.log(error.message);
+		}
+    };
+
+    useEffect( () => {
+        prepareCounter();
+        focusListener = navigation.addListener('didFocus', () => {
+			//console.log('Screen Focused');
+            accessCounter.count+=1;
+            saveFoodListCounter('foodList_counter', accessCounter);
+            console.log('Food List Counter: ' + accessCounter.count);
+            firebaseRef.child('Users').child(token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Food List Screen Count').set(accessCounter.count);	
+		});
+        
+    }, []);
 
     return(
         <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
