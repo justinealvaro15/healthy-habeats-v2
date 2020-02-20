@@ -59,7 +59,7 @@ const FoodListScreen = ({ navigation }) => {
                 data = JSON.parse(data);
                 //same day
                 if(data.dateAccessed === moment().format('MMMM DD YYYY')){
-                    accessCounter.count = data.count; /*+ 1;*/
+                    accessCounter.count = data.count + 1;
                     accessCounter.dateAccessed = data.dateAccessed;
                 }
                 //next day
@@ -72,7 +72,7 @@ const FoodListScreen = ({ navigation }) => {
 			// Error retrieving data
 			console.log(error.message);
         }    
-        firebaseRef.child('Users').child(token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Home Screen Count').set(accessCounter.count);	
+        firebaseRef.child('Users').child(token).child('Screen Access Counters').child(moment().format('MMMM DD YYYY')).child('Food List Screen Count').set(accessCounter.count);	
     };
     
 	const saveFoodListCounter = async (key,value) => {
