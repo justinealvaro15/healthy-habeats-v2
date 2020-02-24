@@ -59,7 +59,7 @@ const FoodListScreen = ({ navigation }) => {
                 data = JSON.parse(data);
                 //same day
                 if(data.dateAccessed === moment().format('MMMM DD YYYY')){
-                    accessCounter.count = data.count + 1;
+                    accessCounter.count = data.count; /*+ 1;*/
                     accessCounter.dateAccessed = data.dateAccessed;
                 }
                 //next day
