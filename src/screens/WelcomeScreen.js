@@ -30,7 +30,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+const firebaseRef = firebase.database().ref();
 
 _handleNotification = notification => {
 	Vibration.vibrate();
@@ -202,6 +202,8 @@ export default class WelcomeScreen extends React.Component {
 					//4 healthy tips notif
 					//Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification4, schedulingOptions4);
 					//Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions5);
+					const currentDate = new Date();
+					firebaseRef.child('Users').child(token).child('TIMESTAMP').set(currentDate);
 					this.props.navigation.replace('Home');
 					this.props.navigation.navigate('Tutorial1');
 				} else {
@@ -215,7 +217,7 @@ export default class WelcomeScreen extends React.Component {
 		return(
 			<View style={styles.main}>
 				<Image source={require('../../assets/logo.png')} style={styles.logo}/>
-				<Text style={styles.version}>version 2.1.0</Text>
+				<Text style={styles.version}>version 2.1.1</Text>
 			</View>
 		);
 	}
