@@ -58,7 +58,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                     });
                                 }}
                             >
-                                <View>
+                                <View style={{flex: 9}}>
                                     <Text style={styles.text_regular}>{item.foodName}</Text>
                                     <Text style={styles.text_small}>
                                         Serving: {item.serving} • {category}: {currentStat} 
@@ -141,7 +141,6 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                     />
                                 </View>
                             </TouchableOpacity>
-                            //</Swipeout>
                         )
                     }}
                 />
@@ -168,6 +167,7 @@ const styles = StyleSheet.create({
     button_delete: {
         alignItems: 'center',
         flexDirection: 'row',
+        flex: 1
     },
     container: {
         backgroundColor: ThemeConstants.MAIN_WHITE,
