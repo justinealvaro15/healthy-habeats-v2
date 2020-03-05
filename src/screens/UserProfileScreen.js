@@ -131,12 +131,12 @@ const UserProfileScreen = ({ navigation }) => {
 			console.log(error.message);
 		}
     };
-    /*useEffect( () => {
+    useEffect( () => {
         getUserData();
         //prepareCounter();
         //console.log(screen_counter);
         //console.log('USER PROFILE');
-    },[]);*/
+    },[]);
 
     useEffect( () => {
         getExpoToken();
