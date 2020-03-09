@@ -195,7 +195,6 @@ export default class WelcomeScreen extends React.Component {
 			.then((state) => {
 				if(this.state.userToken === 'firstTime'){
 					//B,L,D notifs
-					Notifications.cancelAllScheduledNotificationsAsync();
 					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification10, schedulingOptions1);
 					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions2);
 					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification6, schedulingOptions3);
@@ -207,6 +206,10 @@ export default class WelcomeScreen extends React.Component {
 					this.props.navigation.replace('Home');
 					this.props.navigation.navigate('Tutorial1');
 				} else {
+					//Notifications.cancelAllScheduledNotificationsAsync();
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification10, schedulingOptions1);
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification11, schedulingOptions2);
+					Notifications.scheduleLocalNotificationAsync(NotificationsText.scheduledNotification6, schedulingOptions3);
 					this.props.navigation.replace('Home');
 				}
 			})
@@ -217,7 +220,7 @@ export default class WelcomeScreen extends React.Component {
 		return(
 			<View style={styles.main}>
 				<Image source={require('../../assets/logo.png')} style={styles.logo}/>
-				<Text style={styles.version}>version 2.2.0</Text>
+				<Text style={styles.version}>version 2.3.0</Text>
 			</View>
 		);
 	}
