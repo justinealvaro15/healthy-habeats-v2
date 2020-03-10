@@ -67,7 +67,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                             category === 'Energy' ? (item.calories*item.serving).toFixed(1) : 
                                             category === 'Carbs' ? (item.carbs*item.serving).toFixed(1) :
                                             category === 'Proteins' ? (item.proteins*item.serving).toFixed(1) :
-                                            category === 'Fats' ? (item.fat*item.serving).toFixed(1) :
+                                            category === 'Fats' ? (item.fats*item.serving).toFixed(1) :
                                             null
                                         }
                                         
