@@ -67,10 +67,18 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                     });
                                 }}
                             >
-                                <View>
+                                <View style={{flex: 9}}>
                                     <Text style={styles.text_regular}>{item.foodName}</Text>
                                     <Text style={styles.text_small}>
-                                        Serving: {item.serving} • {category}: {currentStat} 
+                                        Serving: {item.serving} • {category}:{' '}  
+
+                                        {
+                                            category === 'Energy' ? (item.calories*item.serving).toFixed(1) : 
+                                            category === 'Carbs' ? (item.carbs*item.serving).toFixed(1) :
+                                            category === 'Proteins' ? (item.proteins*item.serving).toFixed(1) :
+                                            category === 'Fats' ? (item.fats*item.serving).toFixed(1) :
+                                            null
+                                        }
                                         
                                         {category === 'Energy' ? ' kcal ' : ' g '}
                                         (
@@ -176,6 +184,7 @@ const styles = StyleSheet.create({
     button_delete: {
         alignItems: 'center',
         flexDirection: 'row',
+        flex: 1
     },
     container: {
         backgroundColor: ThemeConstants.MAIN_WHITE,
