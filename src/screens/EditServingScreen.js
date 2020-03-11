@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Text, TouchableHighlight, ToastAndroid, ScrollView, StyleSheet, View } from 'react-native';
-
-import * as firebase from 'firebase';
 import '@firebase/firestore';
 
 import { Feather } from '@expo/vector-icons';
+import * as firebase from 'firebase';
+import React, { useEffect, useState } from 'react';
+import { Platform, ScrollView, StyleSheet, Text, ToastAndroid, TouchableHighlight, View } from 'react-native';
+
 import * as ThemeConstants from '../common/Themes';
 
 const increment = 0.5;
@@ -31,11 +31,6 @@ const EditServingScreen = ({ navigation }) => {
 
     let actionSubmit = '';
 
-    useEffect( () => {
-        //console.log(mealTitle);
-        //console.log('User ID: ' + userID);
-    }, []);
-
     const render_top = () => {
         return(
             <View style={styles.top}>
@@ -53,8 +48,7 @@ const EditServingScreen = ({ navigation }) => {
                                 setServing(serving-increment);
                                 setPieces(pieces)
                             }
-                        }
-                        }
+                        }}
                         underlayColor={ThemeConstants.HIGHLIGHT_GREEN}
                     >
                         <Feather name='minus' style={styles.text_button_green}/>
@@ -158,7 +152,7 @@ const EditServingScreen = ({ navigation }) => {
                     firebaseRef.child('Users').child(userID).child('Food Intakes').child(mealTitle).set(temp);
 
                     navigation.navigate('Home');
-                    ToastAndroid.show(`${actionSubmit} ${foodItem.foodName} successfully!`, ToastAndroid.SHORT);
+                    notifyMessage(`${actionSubmit} ${foodItem.foodName} successfully!`);
                 }}
             >
                 <Text style={styles.text_button_save}>Save</Text>
@@ -177,6 +171,12 @@ const EditServingScreen = ({ navigation }) => {
                 <Text>{Math.round(foodItem.pieces*serving*100)/100} {pieces*serving <= 1 ? 'piece' : 'pieces'}</Text>
             </View>
         );
+    };
+
+    const notifyMessage = (msg) => {
+        if (Platform.OS === 'android') {
+            ToastAndroid.show(msg, ToastAndroid.SHORT)
+        }
     };
 
     return(
