@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AsyncStorage, BackHandler, Keyboard, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, View } from 'react-native';
-import Slider from "react-native-slider";
+import { AsyncStorage, BackHandler, Keyboard, KeyboardAvoidingView, ScrollView, Slider, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import * as ThemeConstants from '../common/Themes';
@@ -44,16 +43,14 @@ const AnthropometricScreen = ({ navigation }) => {
         const data6 = await AsyncStorage.getItem('total_proteins') || 0;
         const data7 = await AsyncStorage.getItem('total_fats') || 0;
 
-        setWeight(parseInt(JSON.parse(data1)));
-        setHeight(parseInt(JSON.parse(data2)));
-        setActivityLevel(parseInt(JSON.parse(data3)));
+        setWeight(parseInt(JSON.parse(JSON.stringify(data1))));
+        setHeight(parseInt(JSON.parse(JSON.stringify(data2))));
+        setActivityLevel(parseInt(JSON.parse(JSON.stringify(data3))));
 
-        saveData('total_calories', JSON.parse(data4));
-        saveData('total_carbs', JSON.parse(data5));
-        saveData('total_proteins', JSON.parse(data6));
-        saveData('total_fats', JSON.parse(data7));
-
-
+        saveData('total_calories', JSON.parse(JSON.stringify(data4)));
+        saveData('total_carbs', JSON.parse(JSON.stringify(data5)));
+        saveData('total_proteins', JSON.parse(JSON.stringify(data6)));
+        saveData('total_fats', JSON.parse(JSON.stringify(data7)));
     };
 
     const getUserToken = async () => {
@@ -265,6 +262,9 @@ const AnthropometricScreen = ({ navigation }) => {
                             minimumValue={1}
                             onValueChange={(value) => setActivityLevel(value)}
                             step={1}
+                            thumbTintColor={'black'}
+                            minimumTrackTintColor={'black'}
+                            // style={{flex: 1}}
                         />
                         <Text style={styles.text_regular2}>{AnthroText.activityTitle[activityLevel-1]}</Text>
                         <Text>{AnthroText.activityDesc[activityLevel-1]}</Text>
