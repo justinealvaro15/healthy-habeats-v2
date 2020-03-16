@@ -277,6 +277,9 @@ const AnthropometricScreen = ({ navigation }) => {
                             minimumValue={1}
                             onValueChange={(value) => setActivityLevel(value)}
                             step={1}
+                            thumbTintColor={'black'}
+                            minimumTrackTintColor={'black'}
+                            // style={{flex: 1}}
                         />
                         <Text style={styles.text_regular2}>{AnthroText.activityTitle[activityLevel-1]}</Text>
                         <Text>{AnthroText.activityDesc[activityLevel-1]}</Text>
