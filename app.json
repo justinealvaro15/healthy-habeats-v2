@@ -16,7 +16,7 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "package": "com.cs199.healthyhabeats",
-      "versionCode": 4,
+      "versionCode": 8,
       "icon": "./assets/icon.png"
     },
     "notification": {

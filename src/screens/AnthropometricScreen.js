@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Alert,
     AsyncStorage,
     BackHandler,
     Keyboard,
     KeyboardAvoidingView,
-    Platform,
     ScrollView,
+    Slider,
     StyleSheet,
     Text,
     TextInput,
@@ -14,7 +13,6 @@ import {
     TouchableHighlight,
     View,
 } from 'react-native';
-import Slider from 'react-native-slider';
 import { withNavigation } from 'react-navigation';
 
 import * as AnthroText from '../common/AnthropometricText';
