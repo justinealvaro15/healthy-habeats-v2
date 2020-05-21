@@ -6,11 +6,11 @@
     "icon": "./assets/icon.png",
     "version": "2.4.4",
     "orientation": "portrait",
-    "description": "CS 199 Thesis: Version 2",
+    "description": "CS 199 Thesis: iOS Version 2",
     "primaryColor": "#4285F4",
     "ios": {
       "bundleIdentifier": "com.cs199.healthyhabeats2",
-      "buildNumber": "2.0.4",
+      "buildNumber": "2.4.4",
       "icon": "./assets/icon.png"
     },
     "android": {

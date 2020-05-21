@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, AsyncStorage, FlatList, Keyboard, StyleSheet, Text, ToastAndroid, TouchableHighlight, TouchableOpacity, View } from 'react-native';
-import { Feather } from '@expo/vector-icons'
-import { withNavigation } from 'react-navigation';
-import * as ThemeConstants from '../common/Themes';
-
-import * as firebase from 'firebase';
 import '@firebase/firestore';
+
+import { Feather } from '@expo/vector-icons';
+import * as firebase from 'firebase';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, Keyboard, Platform, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+
+import * as ThemeConstants from '../common/Themes';
 
 // FOODARRAY: contains list of foods in a particular setting
 // when pressed => FOODARRAY[INDEX] get the food object
@@ -26,7 +27,15 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
     const setTotalFoodArray = onDeletion3;
 
     let view_foods = x_date;
-    
+
+    const notifyMessage = (msg) => {
+        if (Platform.OS === 'android') {
+            ToastAndroid.show(msg, ToastAndroid.SHORT)
+        } else {
+            Alert.alert(msg);
+        }
+    };
+
     useEffect( () => {
         console.log('Deleted');
         console.log(view_foods);
@@ -139,7 +148,7 @@ const IntakeFoodContainer = ({ food, mealTitle, onDeletion, onDeletion2, onDelet
                                                         temp = meal;
                                                         firebaseRef.child('Users').child(token).child('Food Intakes').child(mealTitle).set(temp);
 
-                                                        ToastAndroid.show(`Removed ${item.foodName} successfully.`, ToastAndroid.SHORT);                                                        
+                                                        notifyMessage(`Removed ${item.foodName} successfully.`);
                                                         navigation.navigate('Home');
                                                     }
                                                 }

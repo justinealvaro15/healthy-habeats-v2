@@ -1,15 +1,14 @@
+import '@firebase/firestore';
+
+import { Notifications } from 'expo';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+import * as firebase from 'firebase';
 import React from 'react';
 import { AsyncStorage, Dimensions, Image, StyleSheet, Text, Vibration, View, YellowBox } from 'react-native';
 
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
-
-import * as ThemeConstants from '../common/Themes';
-import * as firebase from 'firebase';
-import '@firebase/firestore';
-
 import * as NotificationsText from '../common/NotificationsText';
+import * as ThemeConstants from '../common/Themes';
 
 YellowBox.ignoreWarnings([
     'VirtualizedLists should never be nested',
@@ -60,14 +59,14 @@ registerForPushNotificationsAsync = async () => {
 		}
 
 		if (finalStatus !== 'granted') {
-			alert('Failed to get push token for push notification!');
+			console.log('Failed to get push token for push notification!');
 			return;
 		}
 		token = await Notifications.getExpoPushTokenAsync();
 		token = token.slice(18,40);
 		saveExpoToken(token);
 	} else {
-		alert('Must use physical device for Push Notifications');
+		console.log('Must use physical device for Push Notifications');
 	}
 }; 
 
